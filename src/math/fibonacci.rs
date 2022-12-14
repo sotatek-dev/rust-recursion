@@ -1,9 +1,8 @@
-use num::traits::{One, Zero};
-use std::ops::{Add, Sub};
+use num::Integer;
 
 pub fn fibonacci<T>(n: T) -> Option<T>
 where
-    T: Zero + One + PartialOrd + Add<Output = T> + Sub<Output = T> + Clone,
+    T: PartialOrd + Integer + Clone,
 {
     if n < T::zero() {
         return None;

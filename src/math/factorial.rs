@@ -1,10 +1,8 @@
-use std::ops::{Mul, Sub};
-
-use num::{One, Zero};
+use num::Integer;
 
 pub fn factorial<T>(n: T) -> Option<T>
 where
-    T: Zero + One + PartialOrd + Mul<Output = T> + Sub<Output = T> + Clone,
+    T: PartialOrd + Integer + Clone,
 {
     if n < T::zero() {
         return None;
