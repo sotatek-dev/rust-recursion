@@ -1,2 +1,3 @@
 # rust-recursion
-Recursion Algorithms implemented in Rust
+
+Recursive Algorithms implemented in Rust
