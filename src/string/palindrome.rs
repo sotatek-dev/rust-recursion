@@ -1,23 +1,17 @@
-use std::str::Chars;
-
-fn _is_palindrome(input_chars: &mut Chars) -> bool {
-    if input_chars.as_str().len() == 0 {
-        return true;
-    }
-    if let (Some(c1), Some(c2)) = (input_chars.next(), input_chars.next_back()) {
-        if c1 != c2 {
-            return false;
+pub fn is_palindrome<I, T>(input: &mut I) -> bool
+where
+    I: DoubleEndedIterator<Item = T>,
+    T: PartialOrd,
+{
+    if let Some(c1) = input.next() {
+        if let Some(c2) = input.next_back() {
+            if c1 != c2 {
+                return false;
+            }
         }
+        return is_palindrome(input);
     }
-    return _is_palindrome(input_chars);
-}
-
-pub fn is_palindrome(input: &str) -> bool {
-    if input.len() <= 1 {
-        return true;
-    }
-    let mut input_chars = input.chars();
-    return _is_palindrome(&mut input_chars);
+    true
 }
 
 #[cfg(test)]
@@ -26,8 +20,10 @@ mod tests {
 
     #[test]
     fn is_palindrome_test() {
-        assert!(is_palindrome("aba"));
-        assert!(is_palindrome("abba"));
-        assert!(!is_palindrome("abbaaaaddf"));
+        assert!(is_palindrome(&mut "aba".chars()));
+        assert!(is_palindrome(&mut "abba".chars()));
+        assert!(!is_palindrome(&mut "abbabcd".chars()));
+        assert!(is_palindrome(&mut vec![1, 2, 1].iter()));
+        assert!(!is_palindrome(&mut vec![1, 2, 1, 1, 1].iter()));
     }
 }
