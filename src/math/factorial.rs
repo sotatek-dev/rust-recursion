@@ -23,7 +23,7 @@ mod tests {
     use super::factorial;
 
     #[test]
-    fn fibonacci_test() {
+    fn factorial_test() {
         assert_eq!(factorial(0), Some(1));
         assert_eq!(factorial(10), Some(3628800));
     }
